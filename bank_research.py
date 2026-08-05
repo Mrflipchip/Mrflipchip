@@ -20,7 +20,7 @@ Return ONLY valid JSON in this exact format:
   "program_description": "one sentence describing what their main program currently does",
   "program_gap": "one sentence on what structured/validated curriculum would add that they currently lack",
   "audience": "youth | employees | communities | mixed",
-  "opening_line": "one verified sentence with a specific fact (program name, reach number, or initiative) — no fabrication",
+  "opening_line": "one verified sentence with a specific fact (program name, reach number, or initiative). Do not use dashes or em-dashes. No fabrication.",
   "retention_line": "one specific AflaThrive stat or outcome that fits their model best"
 }}
 
@@ -31,7 +31,7 @@ RETENTION_OPTIONS = {
     "youth": "Programme completers are 40% more likely to open savings accounts and hold 3x more funds than non-participants.",
     "employees": "Employees who complete AflaThrive financial wellness modules report 28% reduction in financial stress and demonstrate measurably improved savings behaviour.",
     "communities": "Community-level delivery through AflaThrive's model has produced verified behaviour change in 42 million participants across 112 countries.",
-    "mixed": "Programme completers demonstrate measurable behaviour change across savings, budgeting, and entrepreneurship — validated by a World Bank randomised controlled trial.",
+    "mixed": "Programme completers demonstrate measurable behaviour change across savings, budgeting, and entrepreneurship, validated by a World Bank randomised controlled trial.",
 }
 
 
@@ -43,7 +43,7 @@ def research_bank(bank_name: str, client: anthropic.Anthropic) -> dict:
             response = client.messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=1024,
-                tools=[{"type": "web_search_20250305", "name": "web_search"}],
+                tools=[{"type": "web_search_20260209", "name": "web_search"}],
                 messages=[{"role": "user", "content": prompt}],
             )
 
@@ -54,9 +54,8 @@ def research_bank(bank_name: str, client: anthropic.Anthropic) -> dict:
                     end = text.rfind("}") + 1
                     if start != -1 and end > start:
                         data = json.loads(text[start:end])
-                        if not data.get("retention_line"):
-                            audience = data.get("audience", "mixed")
-                            data["retention_line"] = RETENTION_OPTIONS.get(audience, RETENTION_OPTIONS["mixed"])
+                        audience = data.get("audience", "mixed")
+                        data["retention_line"] = RETENTION_OPTIONS.get(audience, RETENTION_OPTIONS["mixed"])
                         return data
 
         except anthropic.RateLimitError:

@@ -10,8 +10,8 @@ CONTACTS = [
     {"bank": "UnionBank", "name": "Michelle Rubio", "first_name": "Michelle", "role": "Head of CSR / EVP & Chief Human Resources Officer", "email": "mrubio@unionbankph.com"},
     {"bank": "DBP", "name": "Catherine T. Magana", "first_name": "Catherine", "role": "Head of Sustainability", "email": "catherinemagana@dbp.ph"},
     {"bank": "EastWest Bank", "name": "Juan Alfonso D. Suarez", "first_name": "Juan Alfonso", "role": "Chief People, Corporate Services & Sustainability Officer", "email": "jasuarez@eastwestbanker.com"},
-    {"bank": "GoTyme Bank", "name": "Daniel Stacey", "first_name": "Daniel", "role": "Chief Product Officer", "email": "daniel.stacey@gotyme.com.ph"},
-    {"bank": "GoTyme Bank", "name": "Rachel M. Freeman", "first_name": "Rachel", "role": "Chief Growth Officer", "email": "rachel.freeman@gotyme.com.ph"},
-    {"bank": "Tonik Bank", "name": "Mila Bedrenets", "first_name": "Mila", "role": "Head of Growth", "email": "mbedrenets@tonikbank.com"},
+    {"bank": "GoTyme Bank", "name": "Daniel Stacey", "first_name": "Daniel", "role": "Chief Product Officer", "email": "daniel.stacey@gotyme.com.ph", "bank_type": "digital"},
+    {"bank": "GoTyme Bank", "name": "Rachel M. Freeman", "first_name": "Rachel", "role": "Chief Growth Officer", "email": "rachel.freeman@gotyme.com.ph", "bank_type": "digital"},
+    {"bank": "Tonik Bank", "name": "Mila Bedrenets", "first_name": "Mila", "role": "Head of Growth", "email": "mbedrenets@tonikbank.com", "bank_type": "digital"},
     {"bank": "CARD Bank", "name": "Flordeliza L. Sarmiento", "first_name": "Flordeliza", "role": "Foundation Executive Director / Head of Financial Inclusion", "email": "flordeliza.sarmiento@cardbankph.com"},
 ]

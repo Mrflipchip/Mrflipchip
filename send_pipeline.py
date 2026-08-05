@@ -35,17 +35,20 @@ def log_to_airtable(cfg, contact, status):
         print(f"  [Airtable] Could not log: {e}")
 
 
-def run(dry_run, bank_filter, test_address):
+def run(dry_run, bank_filters, test_address, auto_confirm):
+    if auto_confirm and not test_address:
+        sys.exit("--auto-confirm requires --test-address (refusing to auto-send to real bank inboxes).")
+
     cfg = load_config()
     if not cfg["anthropic_api_key"]:
         sys.exit("Missing ANTHROPIC_API_KEY.")
 
     client = anthropic.Anthropic(api_key=cfg["anthropic_api_key"])
     contacts = CONTACTS
-    if bank_filter:
-        contacts = [c for c in contacts if bank_filter.lower() in c["bank"].lower()]
+    if bank_filters:
+        contacts = [c for c in contacts if any(b.lower() in c["bank"].lower() for b in bank_filters)]
         if not contacts:
-            sys.exit(f"No contacts found matching bank '{bank_filter}'")
+            sys.exit(f"No contacts found matching bank(s) {bank_filters}")
 
     profile_cache = {}
 
@@ -83,7 +86,11 @@ def run(dry_run, bank_filter, test_address):
         except Exception as e:
             print(f"  One-pager error: {e} — sending without attachment")
 
-        choice = input("\n  Send? [y / n / skip] ").strip().lower()
+        if auto_confirm:
+            choice = "y"
+            print("\n  [AUTO-CONFIRM] Sending.")
+        else:
+            choice = input("\n  Send? [y / n / skip] ").strip().lower()
         if choice != "y":
             print("  Skipped.")
             continue
@@ -104,9 +111,20 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--bank")
+    p.add_argument("--banks", help="Comma-separated list of banks, e.g. 'Metrobank,RCBC'")
     p.add_argument("--test-address")
+    p.add_argument("--auto-confirm", action="store_true",
+                    help="Skip the per-email confirmation prompt. Requires --test-address.")
     args = p.parse_args()
-    run(dry_run=args.dry_run, bank_filter=args.bank, test_address=args.test_address)
+
+    bank_filters = []
+    if args.bank:
+        bank_filters.append(args.bank)
+    if args.banks:
+        bank_filters.extend(b.strip() for b in args.banks.split(",") if b.strip())
+
+    run(dry_run=args.dry_run, bank_filters=bank_filters, test_address=args.test_address,
+        auto_confirm=args.auto_confirm)
 
 
 if __name__ == "__main__":

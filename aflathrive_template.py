@@ -1,11 +1,11 @@
-SUBJECT = "AflaThrive x {bank} — Globally Validated Financial Education"
+SUBJECT_A = "AflaThrive x {bank}, Globally Validated Financial Education"
 
-BODY_PLAIN = """\
+BODY_PLAIN_A = """\
 Dear {first_name},
 
 {opening_line}
 
-{foundation_ref} currently {program_description}. What it does not yet deliver is a structured, \
+{foundation_ref} has the reach and the delivery infrastructure. What it does not yet have is a structured, \
 globally validated curriculum that changes financial behaviour measurably and gives {bank} a \
 reportable, third-party-validated outcome to show the Bangko Sentral ng Pilipinas and your \
 {stakeholder_label} stakeholders.
@@ -26,10 +26,10 @@ priority under its National Strategy for Financial Inclusion. AflaThrive gives {
 validated, independently assessed delivery mechanism you can report to the BSP and surface \
 externally as a market-leading initiative.
 
-Scale: The curriculum is modular — short, structured modules that drop into {delivery_label}. \
+Scale: The curriculum is modular, short, structured modules that drop into {delivery_label}. \
 Pre and post assessment data flows back to you. It scales without adding operational burden.
 
-I have attached a one-pager with more detail. I would welcome a brief call to explore the fit — \
+I have attached a one-pager with more detail. I would welcome a brief call to explore the fit, \
 would next week work for you?
 
 Best regards,
@@ -37,12 +37,12 @@ Julian Coulbert
 AflaThrive
 """
 
-BODY_HTML = """\
+BODY_HTML_A = """\
 <p>Dear {first_name},</p>
 
 <p>{opening_line}</p>
 
-<p>{foundation_ref} currently {program_description}. What it does not yet deliver is a structured,
+<p>{foundation_ref} has the reach and the delivery infrastructure. What it does not yet have is a structured,
 globally validated curriculum that changes financial behaviour measurably and gives {bank} a
 reportable, third-party-validated outcome to show the Bangko Sentral ng Pilipinas and your
 {stakeholder_label} stakeholders.</p>
@@ -63,10 +63,81 @@ priority under its National Strategy for Financial Inclusion. AflaThrive gives {
 validated, independently assessed delivery mechanism you can report to the BSP and surface
 externally as a market-leading initiative.</p>
 
-<p><strong>Scale:</strong> The curriculum is modular — short, structured modules that drop into {delivery_label}.
+<p><strong>Scale:</strong> The curriculum is modular, short, structured modules that drop into {delivery_label}.
 Pre and post assessment data flows back to you. It scales without adding operational burden.</p>
 
-<p>I have attached a one-pager with more detail. I would welcome a brief call to explore the fit —
+<p>I have attached a one-pager with more detail. I would welcome a brief call to explore the fit,
+would next week work for you?</p>
+
+<p>Best regards,<br>
+<strong>Julian Coulbert</strong><br>
+AflaThrive</p>
+"""
+
+SUBJECT_B = "AflaThrive x {bank}, Financial Education Built for Mobile First Banking"
+
+BODY_PLAIN_B = """\
+Dear {first_name},
+
+{opening_line}
+
+{bank} has built a mobile first product with real distribution. What most digital banks lack is a \
+structured, globally validated financial education layer inside the app itself, one that increases \
+activation, deepens engagement, and gives users a reason to open the app beyond checking a balance.
+
+That is what AflaThrive provides.
+
+I work with AflaThrive, the commercial arm of Aflatoun International. We are a World Bank-validated \
+financial education organisation deployed in 112 countries, with 42 million young people reached \
+across 50 languages. We license a structured financial education curriculum that embeds directly \
+into your onboarding flow and in app experience. Your brand. Your interface. Your customer relationship.
+
+For {bank} specifically:
+
+Engagement: {retention_line}
+
+Onboarding: A short, gamified financial education module during onboarding increases completion \
+rates and gives new users an early, positive interaction with the app, rather than a blank dashboard.
+
+Retention: Structured content keeps users returning between transactions. It integrates via SDK or \
+embedded webview and scales without adding operational burden.
+
+I have attached a one-pager with more detail. I would welcome a brief call to explore the fit, \
+would next week work for you?
+
+Best regards,
+Julian Coulbert
+AflaThrive
+"""
+
+BODY_HTML_B = """\
+<p>Dear {first_name},</p>
+
+<p>{opening_line}</p>
+
+<p>{bank} has built a mobile first product with real distribution. What most digital banks lack is a
+structured, globally validated financial education layer inside the app itself, one that increases
+activation, deepens engagement, and gives users a reason to open the app beyond checking a balance.</p>
+
+<p>That is what AflaThrive provides.</p>
+
+<p>I work with AflaThrive, the commercial arm of Aflatoun International. We are a World Bank-validated
+financial education organisation deployed in 112 countries, with 42 million young people reached
+across 50 languages. We license a structured financial education curriculum that embeds directly
+into your onboarding flow and in app experience. Your brand. Your interface. Your customer relationship.</p>
+
+<p><strong>For {bank} specifically:</strong></p>
+
+<p><strong>Engagement:</strong> {retention_line}</p>
+
+<p><strong>Onboarding:</strong> A short, gamified financial education module during onboarding increases
+completion rates and gives new users an early, positive interaction with the app, rather than a
+blank dashboard.</p>
+
+<p><strong>Retention:</strong> Structured content keeps users returning between transactions. It integrates
+via SDK or embedded webview and scales without adding operational burden.</p>
+
+<p>I have attached a one-pager with more detail. I would welcome a brief call to explore the fit,
 would next week work for you?</p>
 
 <p>Best regards,<br>
@@ -90,10 +161,21 @@ STAKEHOLDER_LABELS = {
 
 
 def generate_email(contact: dict, profile: dict) -> tuple:
-    required = ["opening_line", "program_description", "retention_line"]
+    required = ["opening_line", "retention_line"]
     missing = [f for f in required if not profile.get(f)]
     if missing:
         raise ValueError(f"Missing verified fields for {contact['bank']}: {missing}. Run research first.")
+
+    bank_type = contact.get("bank_type", "foundation")
+
+    if bank_type == "digital":
+        fields = {
+            "first_name": contact["first_name"],
+            "bank": contact["bank"],
+            "opening_line": profile["opening_line"],
+            "retention_line": profile["retention_line"],
+        }
+        return SUBJECT_B.format(**fields), BODY_PLAIN_B.format(**fields), BODY_HTML_B.format(**fields)
 
     audience = profile.get("audience", "mixed")
     foundation_ref = profile.get("foundation_name") or f"{contact['bank']} Foundation"
@@ -103,10 +185,9 @@ def generate_email(contact: dict, profile: dict) -> tuple:
         "bank": contact["bank"],
         "opening_line": profile["opening_line"],
         "foundation_ref": foundation_ref,
-        "program_description": profile["program_description"],
         "retention_line": profile["retention_line"],
         "stakeholder_label": STAKEHOLDER_LABELS.get(audience, STAKEHOLDER_LABELS["mixed"]),
         "delivery_label": DELIVERY_LABELS.get(audience, DELIVERY_LABELS["mixed"]),
     }
 
-    return SUBJECT.format(**fields), BODY_PLAIN.format(**fields), BODY_HTML.format(**fields)
+    return SUBJECT_A.format(**fields), BODY_PLAIN_A.format(**fields), BODY_HTML_A.format(**fields)
