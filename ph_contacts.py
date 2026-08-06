@@ -1,17 +1,12 @@
-CONTACTS = [
-    {"bank": "BDO Unibank", "name": "Mario A. Deriquito", "first_name": "Mario", "role": "Foundation President", "email": "mario.deriquito@bdo.com.ph"},
-    {"bank": "BDO Unibank", "name": "Rosemarie M. Espinosa", "first_name": "Rosemarie", "role": "Foundation Programme Director", "email": "rosemarie.espinosa@bdo.com.ph"},
-    {"bank": "BPI", "name": "Ma. Carmina T. Marquez", "first_name": "Carmina", "role": "Foundation Executive Director", "email": "cmarquez@bpi.com.ph"},
-    {"bank": "Metrobank", "name": "Philip Francisco Dy", "first_name": "Philip", "role": "Foundation President", "email": "philip.dy@metrobank.com.ph"},
-    {"bank": "LandBank", "name": "Roy C. Oscillada", "first_name": "Roy", "role": "Foundation Executive Director (LCDFI)", "email": "roscillada@landbank.com"},
-    {"bank": "RCBC", "name": "Armi Lamberte", "first_name": "Armi", "role": "Chief Sustainability Officer", "email": "alamberte@rcbc.com"},
-    {"bank": "RCBC", "name": "Lito Villanueva", "first_name": "Lito", "role": "Head of Financial Inclusion", "email": "lvillanueva@rcbc.com"},
-    {"bank": "Security Bank", "name": "Louie De Real", "first_name": "Louie", "role": "Foundation Executive Director", "email": "ldereal@securitybank.com"},
-    {"bank": "UnionBank", "name": "Michelle Rubio", "first_name": "Michelle", "role": "Head of CSR / EVP & Chief Human Resources Officer", "email": "mrubio@unionbankph.com"},
-    {"bank": "DBP", "name": "Catherine T. Magana", "first_name": "Catherine", "role": "Head of Sustainability", "email": "catherinemagana@dbp.ph"},
-    {"bank": "EastWest Bank", "name": "Juan Alfonso D. Suarez", "first_name": "Juan Alfonso", "role": "Chief People, Corporate Services & Sustainability Officer", "email": "jasuarez@eastwestbanker.com"},
-    {"bank": "GoTyme Bank", "name": "Daniel Stacey", "first_name": "Daniel", "role": "Chief Product Officer", "email": "daniel.stacey@gotyme.com.ph", "bank_type": "digital"},
-    {"bank": "GoTyme Bank", "name": "Rachel M. Freeman", "first_name": "Rachel", "role": "Chief Growth Officer", "email": "rachel.freeman@gotyme.com.ph", "bank_type": "digital"},
-    {"bank": "Tonik Bank", "name": "Mila Bedrenets", "first_name": "Mila", "role": "Head of Growth", "email": "mbedrenets@tonikbank.com", "bank_type": "digital"},
-    {"bank": "CARD Bank", "name": "Flordeliza L. Sarmiento", "first_name": "Flordeliza", "role": "Foundation Executive Director / Head of Financial Inclusion", "email": "flordeliza.sarmiento@cardbankph.com"},
-]
+import csv
+import os
+
+_CSV = os.path.join(os.path.dirname(__file__), "contacts.csv")
+
+
+def load_contacts(csv_path: str = _CSV) -> list[dict]:
+    with open(csv_path, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+CONTACTS = load_contacts()
