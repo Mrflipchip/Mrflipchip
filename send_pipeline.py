@@ -188,6 +188,7 @@ def run(
     auto_confirm: bool,
     contacts_file: str | None,
     from_queue: bool = False,
+    live: bool = False,
 ):
     cfg = load_config()
 
@@ -201,8 +202,12 @@ def run(
     has_queue = os.path.exists(QUEUE_CSV)
 
     # Interactive menu when no flags given
-    if not any([dry_run, bank_filter, banks_filter, test_address, auto_confirm, from_queue, contacts_file]):
+    if not any([dry_run, bank_filter, banks_filter, test_address, auto_confirm, live, from_queue, contacts_file]):
         dry_run, test_address, banks_filter, from_queue = show_menu(has_queue)
+
+    # --live skips menu and sends to real contacts immediately
+    if live:
+        test_address = None
 
     # Prompt about queue if it exists and user didn't explicitly handle it
     if has_queue and not from_queue and not dry_run:
@@ -337,6 +342,7 @@ def main():
     parser.add_argument("--banks", help="Comma-separated list of banks")
     parser.add_argument("--test-address", help="Override recipient — send everything to this address")
     parser.add_argument("--auto-confirm", action="store_true", help="Skip prompts (requires --test-address)")
+    parser.add_argument("--live", action="store_true", help="Send to real contacts immediately, no menu")
     parser.add_argument("--contacts", help="Path to a contacts CSV file (default: contacts.csv)")
     parser.add_argument("--from-queue", action="store_true", help="Process the overflow queue")
     args = parser.parse_args()
@@ -346,6 +352,7 @@ def main():
         banks_filter=args.banks,
         test_address=args.test_address,
         auto_confirm=args.auto_confirm,
+        live=args.live,
         contacts_file=args.contacts,
         from_queue=args.from_queue,
     )
