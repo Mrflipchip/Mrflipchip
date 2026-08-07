@@ -37,7 +37,13 @@ Would next week work for you?
 
 Best regards,
 Julian Coulbert
-AflaThrive
+Commercial Strategy & Operations · AflaThrive
+julian.coulbert@aflathrive.com
++44 7882 827178
+aflathrive.com
+linkedin.com/in/julian-coulbert
+A commercial venture of Aflatoun International
+20 years · 112 countries · 42M+ young people reached
 """
 
 BODY_HTML_A = """\
@@ -66,9 +72,21 @@ Pre and post assessment data flows back to you. It scales without adding operati
 <p>I have attached a one-pager with more detail. I would welcome a brief call to explore the fit.
 Would next week work for you?</p>
 
-<p>Best regards,<br>
-<strong>Julian Coulbert</strong><br>
-AflaThrive</p>
+<p>Best regards,</p>
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 1.5; color: #333333;">
+  <tr>
+    <td>
+      <div style="font-size: 14px; font-weight: bold; color: #000000;">Julian Coulbert</div>
+      <div style="margin-bottom: 8px;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
+      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #333333; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
+      <div>&#9742; +44 7882 827178</div>
+      <div>&#8984; <a href="https://aflathrive.com/" style="color: #333333; text-decoration: none;">aflathrive.com</a></div>
+      <div>in <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #333333; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
+      <div style="margin-top: 8px; font-style: italic;">A commercial venture of Aflatoun International</div>
+      <div>20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+    </td>
+  </tr>
+</table>
 """
 
 # ── Template B: Digital banks / neobanks ──────────────────────────────────────
@@ -105,7 +123,13 @@ Would next week work?
 
 Best regards,
 Julian Coulbert
-AflaThrive
+Commercial Strategy & Operations · AflaThrive
+julian.coulbert@aflathrive.com
++44 7882 827178
+aflathrive.com
+linkedin.com/in/julian-coulbert
+A commercial venture of Aflatoun International
+20 years · 112 countries · 42M+ young people reached
 """
 
 BODY_HTML_B = """\
@@ -138,9 +162,21 @@ onboarding flows or a dedicated learning section. Assessment data flows back to 
 <p>I have attached a one-pager with more detail. Happy to set up a short call to explore the fit.
 Would next week work?</p>
 
-<p>Best regards,<br>
-<strong>Julian Coulbert</strong><br>
-AflaThrive</p>
+<p>Best regards,</p>
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 1.5; color: #333333;">
+  <tr>
+    <td>
+      <div style="font-size: 14px; font-weight: bold; color: #000000;">Julian Coulbert</div>
+      <div style="margin-bottom: 8px;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
+      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #333333; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
+      <div>&#9742; +44 7882 827178</div>
+      <div>&#8984; <a href="https://aflathrive.com/" style="color: #333333; text-decoration: none;">aflathrive.com</a></div>
+      <div>in <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #333333; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
+      <div style="margin-top: 8px; font-style: italic;">A commercial venture of Aflatoun International</div>
+      <div>20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+    </td>
+  </tr>
+</table>
 """
 
 # ── Template C: Schools ───────────────────────────────────────────────────────
@@ -174,7 +210,13 @@ there is a fit. Would next week work?
 
 Best regards,
 Julian Coulbert
-AflaThrive
+Commercial Strategy & Operations · AflaThrive
+julian.coulbert@aflathrive.com
++44 7882 827178
+aflathrive.com
+linkedin.com/in/julian-coulbert
+A commercial venture of Aflatoun International
+20 years · 112 countries · 42M+ young people reached
 """
 
 BODY_HTML_C = """\
@@ -204,9 +246,21 @@ data flows to your academic team. No additional operational burden.</p>
 <p>I have attached a one-pager with more detail. I would welcome a brief call to explore whether
 there is a fit. Would next week work?</p>
 
-<p>Best regards,<br>
-<strong>Julian Coulbert</strong><br>
-AflaThrive</p>
+<p>Best regards,</p>
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 1.5; color: #333333;">
+  <tr>
+    <td>
+      <div style="font-size: 14px; font-weight: bold; color: #000000;">Julian Coulbert</div>
+      <div style="margin-bottom: 8px;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
+      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #333333; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
+      <div>&#9742; +44 7882 827178</div>
+      <div>&#8984; <a href="https://aflathrive.com/" style="color: #333333; text-decoration: none;">aflathrive.com</a></div>
+      <div>in <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #333333; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
+      <div style="margin-top: 8px; font-style: italic;">A commercial venture of Aflatoun International</div>
+      <div>20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+    </td>
+  </tr>
+</table>
 """
 
 # ── Lookup tables ─────────────────────────────────────────────────────────────
