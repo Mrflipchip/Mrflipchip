@@ -139,8 +139,7 @@ _ORG_TYPE_LABELS = {
 
 
 BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "")
-OMNIROUTE_URL = os.environ.get("OMNIROUTE_URL", "http://localhost:20128/v1")
-OMNIROUTE_MODEL = os.environ.get("OMNIROUTE_MODEL", "google/gemini-2.0-flash-exp:free")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 _SEARCH_QUERIES = {
     "bank": [
@@ -193,8 +192,11 @@ def _brave_search(query: str, count: int = 5) -> str:
         return ""
 
 
-def _call_omni(prompt: str, search_queries: list[str]) -> dict | None:
-    """Brave search + free model via OmniRoute. Zero Anthropic credits used."""
+def _call_gemini(prompt: str, search_queries: list[str]) -> dict | None:
+    """Brave search + Gemini Flash. Zero Anthropic credits used."""
+    if not GEMINI_API_KEY:
+        return None
+
     search_context = ""
     for q in search_queries:
         results = _brave_search(q)
@@ -211,20 +213,18 @@ def _call_omni(prompt: str, search_queries: list[str]) -> dict | None:
     )
 
     try:
-        from openai import OpenAI
-        omni = OpenAI(base_url=OMNIROUTE_URL, api_key="omniroute")
-        resp = omni.chat.completions.create(
-            model=OMNIROUTE_MODEL,
-            messages=[{"role": "user", "content": full_prompt}],
-            max_tokens=1000,
+        resp = requests.post(
+            f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}",
+            json={"contents": [{"parts": [{"text": full_prompt}]}]},
+            timeout=30,
         )
-        text = resp.choices[0].message.content or ""
+        text = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
         start = text.find("{")
         end = text.rfind("}") + 1
         if start != -1 and end > start:
             return json.loads(text[start:end])
     except Exception as e:
-        print(f"  OmniRoute error: {e}")
+        print(f"  Gemini error: {e}")
     return None
 
 
@@ -263,17 +263,17 @@ def research_org(org_name: str, org_type: str, country: str, client: anthropic.A
     prompt_template = _PROMPTS.get(org_type, BANK_RESEARCH_PROMPT)
     prompt = prompt_template.format(org=org_name, country=country)
 
-    if BRAVE_API_KEY:
+    if BRAVE_API_KEY and GEMINI_API_KEY:
         raw_queries = _SEARCH_QUERIES.get(org_type, _SEARCH_QUERIES["bank"])
         queries = [q.format(org=org_name, country=country) for q in raw_queries]
-        data = _call_omni(prompt, queries)
+        data = _call_gemini(prompt, queries)
         if data:
             data.setdefault("bank", org_name)
             data["bank"] = org_name
             audience = data.get("audience", "mixed")
             data["retention_line"] = RETENTION_OPTIONS.get(audience, RETENTION_OPTIONS["mixed"])
             return data
-        print("  OmniRoute unavailable, falling back to Anthropic...")
+        print("  Gemini unavailable, falling back to Anthropic...")
 
     data = _call_api(prompt, client)
 
@@ -301,14 +301,14 @@ def discover_orgs(org_type: str, country: str, limit: int, client: anthropic.Ant
         limit=limit,
     )
 
-    if BRAVE_API_KEY:
+    if BRAVE_API_KEY and GEMINI_API_KEY:
         disc_key = f"discovery_{org_type}"
-        raw_queries = _SEARCH_QUERIES.get(disc_key, _SEARCH_QUERIES.get(f"discovery_bank"))
+        raw_queries = _SEARCH_QUERIES.get(disc_key, _SEARCH_QUERIES.get("discovery_bank"))
         queries = [q.format(org_type=org_type, country=country) for q in raw_queries]
-        data = _call_omni(prompt, queries)
+        data = _call_gemini(prompt, queries)
         if data and isinstance(data.get("orgs"), list):
             return [o for o in data["orgs"] if isinstance(o, str) and o.strip()][:limit]
-        print("  OmniRoute unavailable, falling back to Anthropic...")
+        print("  Gemini unavailable, falling back to Anthropic...")
 
     data = _call_api(prompt, client)
     if data and isinstance(data.get("orgs"), list):
