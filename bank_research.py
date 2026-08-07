@@ -1,6 +1,11 @@
+from __future__ import annotations
+
 import json
+import os
 import time
+
 import anthropic
+import requests
 
 # ── Research prompts per org type ─────────────────────────────────────────────
 
@@ -133,6 +138,96 @@ _ORG_TYPE_LABELS = {
 }
 
 
+BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "")
+OMNIROUTE_URL = os.environ.get("OMNIROUTE_URL", "http://localhost:20128/v1")
+OMNIROUTE_MODEL = os.environ.get("OMNIROUTE_MODEL", "google/gemini-2.0-flash-exp:free")
+
+_SEARCH_QUERIES = {
+    "bank": [
+        "{org} foundation financial literacy programs",
+        "{org} CSR financial inclusion {country}",
+    ],
+    "corporate": [
+        "{org} CSR sustainability employee wellness programs",
+        "{org} foundation community education {country}",
+    ],
+    "school": [
+        "{org} financial literacy life skills program",
+        "{org} educational mission student wellbeing {country}",
+    ],
+    "discovery_bank": [
+        "top banks {country} CSR financial inclusion programs",
+        "{country} bank foundation financial literacy",
+    ],
+    "discovery_corporate": [
+        "top companies {country} CSR employee financial wellness",
+        "{country} corporate foundation community education",
+    ],
+    "discovery_school": [
+        "top schools {country} financial literacy curriculum",
+        "{country} school life skills financial education program",
+    ],
+}
+
+
+def _brave_search(query: str, count: int = 5) -> str:
+    if not BRAVE_API_KEY:
+        return ""
+    try:
+        resp = requests.get(
+            "https://api.search.brave.com/res/v1/web/search",
+            headers={
+                "Accept": "application/json",
+                "Accept-Encoding": "gzip",
+                "X-Subscription-Token": BRAVE_API_KEY,
+            },
+            params={"q": query, "count": count},
+            timeout=10,
+        )
+        results = resp.json().get("web", {}).get("results", [])
+        return "\n\n".join(
+            f"{r.get('title','')}: {r.get('description','')}" for r in results
+        )
+    except Exception as e:
+        print(f"  Brave search error: {e}")
+        return ""
+
+
+def _call_omni(prompt: str, search_queries: list[str]) -> dict | None:
+    """Brave search + free model via OmniRoute. Zero Anthropic credits used."""
+    search_context = ""
+    for q in search_queries:
+        results = _brave_search(q)
+        if results:
+            search_context += f"\n\n--- Search: {q} ---\n{results}"
+
+    if not search_context:
+        return None
+
+    full_prompt = (
+        prompt
+        + "\n\nUse ONLY the following search results — do not invent anything:\n"
+        + search_context
+    )
+
+    try:
+        from openai import OpenAI
+        omni = OpenAI(base_url=OMNIROUTE_URL, api_key="omniroute")
+        resp = omni.chat.completions.create(
+            model=OMNIROUTE_MODEL,
+            messages=[{"role": "user", "content": full_prompt}],
+            max_tokens=1000,
+        )
+        text = resp.choices[0].message.content or ""
+        start = text.find("{")
+        end = text.rfind("}") + 1
+        if start != -1 and end > start:
+            return json.loads(text[start:end])
+    except Exception as e:
+        print(f"  OmniRoute error: {e}")
+    return None
+
+
 def _call_api(prompt: str, client: anthropic.Anthropic) -> dict | None:
     for attempt in range(3):
         try:
@@ -163,10 +258,23 @@ def research_org(org_name: str, org_type: str, country: str, client: anthropic.A
     """
     Research an organisation and return a profile dict.
     org_type: "bank" | "corporate" | "school"
-    Always overwrites retention_line with a verified AflaThrive stat.
+    Uses Brave + OmniRoute (free) when available, falls back to Anthropic.
     """
     prompt_template = _PROMPTS.get(org_type, BANK_RESEARCH_PROMPT)
     prompt = prompt_template.format(org=org_name, country=country)
+
+    if BRAVE_API_KEY:
+        raw_queries = _SEARCH_QUERIES.get(org_type, _SEARCH_QUERIES["bank"])
+        queries = [q.format(org=org_name, country=country) for q in raw_queries]
+        data = _call_omni(prompt, queries)
+        if data:
+            data.setdefault("bank", org_name)
+            data["bank"] = org_name
+            audience = data.get("audience", "mixed")
+            data["retention_line"] = RETENTION_OPTIONS.get(audience, RETENTION_OPTIONS["mixed"])
+            return data
+        print("  OmniRoute unavailable, falling back to Anthropic...")
+
     data = _call_api(prompt, client)
 
     if not data:
@@ -184,7 +292,7 @@ def research_org(org_name: str, org_type: str, country: str, client: anthropic.A
 def discover_orgs(org_type: str, country: str, limit: int, client: anthropic.Anthropic) -> list[str]:
     """
     Web-search for up to `limit` organisation names matching org_type in country.
-    Returns a list of name strings.
+    Uses Brave + OmniRoute (free) when available, falls back to Anthropic.
     """
     prompt = DISCOVERY_PROMPT.format(
         org_type=org_type,
@@ -192,6 +300,16 @@ def discover_orgs(org_type: str, country: str, limit: int, client: anthropic.Ant
         country=country,
         limit=limit,
     )
+
+    if BRAVE_API_KEY:
+        disc_key = f"discovery_{org_type}"
+        raw_queries = _SEARCH_QUERIES.get(disc_key, _SEARCH_QUERIES.get(f"discovery_bank"))
+        queries = [q.format(org_type=org_type, country=country) for q in raw_queries]
+        data = _call_omni(prompt, queries)
+        if data and isinstance(data.get("orgs"), list):
+            return [o for o in data["orgs"] if isinstance(o, str) and o.strip()][:limit]
+        print("  OmniRoute unavailable, falling back to Anthropic...")
+
     data = _call_api(prompt, client)
     if data and isinstance(data.get("orgs"), list):
         return [o for o in data["orgs"] if isinstance(o, str) and o.strip()][:limit]
