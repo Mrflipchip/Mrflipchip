@@ -73,17 +73,22 @@ Pre and post assessment data flows back to you. It scales without adding operati
 Would next week work for you?</p>
 
 <p>Best regards,</p>
-<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 1.5; color: #333333;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.6; color: #333333; border-left: 4px solid #1a7a7a; padding-left: 14px;">
   <tr>
     <td>
-      <div style="font-size: 14px; font-weight: bold; color: #000000;">Julian Coulbert</div>
-      <div style="margin-bottom: 8px;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
-      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #333333; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
+      <div style="font-size: 15px; font-weight: bold; color: #1a2a4a;">Julian Coulbert</div>
+      <div style="margin-bottom: 10px; color: #444;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
+      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #1a7a7a; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
       <div>&#9742; +44 7882 827178</div>
-      <div>&#8984; <a href="https://aflathrive.com/" style="color: #333333; text-decoration: none;">aflathrive.com</a></div>
-      <div>in <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #333333; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
-      <div style="margin-top: 8px; font-style: italic;">A commercial venture of Aflatoun International</div>
-      <div>20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+      <div>&#8984; <a href="https://aflathrive.com/" style="color: #1a7a7a; text-decoration: none;">aflathrive.com</a></div>
+      <div><span style="font-weight: bold; color: #1a7a7a;">in</span> <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #1a7a7a; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
+      <div style="margin-top: 12px; background-color: #f5f0e8; padding: 8px 10px; border-left: 4px solid #c8a84b;">
+        <div style="font-style: italic; font-weight: bold; color: #1a2a4a;">A commercial venture of Aflatoun International</div>
+        <div style="color: #555;">20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <img src="https://raw.githubusercontent.com/mrflipchip/mrflipchip/claude/analyze-email-templates-vxTVF/aflathrive.png" alt="AflaThrive" width="500" style="display: block; max-width: 500px;">
+      </div>
     </td>
   </tr>
 </table>
@@ -163,17 +168,22 @@ onboarding flows or a dedicated learning section. Assessment data flows back to 
 Would next week work?</p>
 
 <p>Best regards,</p>
-<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 1.5; color: #333333;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.6; color: #333333; border-left: 4px solid #1a7a7a; padding-left: 14px;">
   <tr>
     <td>
-      <div style="font-size: 14px; font-weight: bold; color: #000000;">Julian Coulbert</div>
-      <div style="margin-bottom: 8px;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
-      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #333333; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
+      <div style="font-size: 15px; font-weight: bold; color: #1a2a4a;">Julian Coulbert</div>
+      <div style="margin-bottom: 10px; color: #444;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
+      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #1a7a7a; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
       <div>&#9742; +44 7882 827178</div>
-      <div>&#8984; <a href="https://aflathrive.com/" style="color: #333333; text-decoration: none;">aflathrive.com</a></div>
-      <div>in <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #333333; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
-      <div style="margin-top: 8px; font-style: italic;">A commercial venture of Aflatoun International</div>
-      <div>20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+      <div>&#8984; <a href="https://aflathrive.com/" style="color: #1a7a7a; text-decoration: none;">aflathrive.com</a></div>
+      <div><span style="font-weight: bold; color: #1a7a7a;">in</span> <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #1a7a7a; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
+      <div style="margin-top: 12px; background-color: #f5f0e8; padding: 8px 10px; border-left: 4px solid #c8a84b;">
+        <div style="font-style: italic; font-weight: bold; color: #1a2a4a;">A commercial venture of Aflatoun International</div>
+        <div style="color: #555;">20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <img src="https://raw.githubusercontent.com/mrflipchip/mrflipchip/claude/analyze-email-templates-vxTVF/aflathrive.png" alt="AflaThrive" width="500" style="display: block; max-width: 500px;">
+      </div>
     </td>
   </tr>
 </table>
@@ -247,17 +257,22 @@ data flows to your academic team. No additional operational burden.</p>
 there is a fit. Would next week work?</p>
 
 <p>Best regards,</p>
-<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 1.5; color: #333333;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.6; color: #333333; border-left: 4px solid #1a7a7a; padding-left: 14px;">
   <tr>
     <td>
-      <div style="font-size: 14px; font-weight: bold; color: #000000;">Julian Coulbert</div>
-      <div style="margin-bottom: 8px;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
-      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #333333; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
+      <div style="font-size: 15px; font-weight: bold; color: #1a2a4a;">Julian Coulbert</div>
+      <div style="margin-bottom: 10px; color: #444;">Commercial Strategy &amp; Operations &middot; AflaThrive</div>
+      <div>&#9993; <a href="mailto:julian.coulbert@aflathrive.com" style="color: #1a7a7a; text-decoration: none;">julian.coulbert@aflathrive.com</a></div>
       <div>&#9742; +44 7882 827178</div>
-      <div>&#8984; <a href="https://aflathrive.com/" style="color: #333333; text-decoration: none;">aflathrive.com</a></div>
-      <div>in <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #333333; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
-      <div style="margin-top: 8px; font-style: italic;">A commercial venture of Aflatoun International</div>
-      <div>20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+      <div>&#8984; <a href="https://aflathrive.com/" style="color: #1a7a7a; text-decoration: none;">aflathrive.com</a></div>
+      <div><span style="font-weight: bold; color: #1a7a7a;">in</span> <a href="https://www.linkedin.com/in/julian-coulbert-942b30274/" style="color: #1a7a7a; text-decoration: none;">linkedin.com/in/julian-coulbert</a></div>
+      <div style="margin-top: 12px; background-color: #f5f0e8; padding: 8px 10px; border-left: 4px solid #c8a84b;">
+        <div style="font-style: italic; font-weight: bold; color: #1a2a4a;">A commercial venture of Aflatoun International</div>
+        <div style="color: #555;">20 years &middot; 112 countries &middot; 42M+ young people reached</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <img src="https://raw.githubusercontent.com/mrflipchip/mrflipchip/claude/analyze-email-templates-vxTVF/aflathrive.png" alt="AflaThrive" width="500" style="display: block; max-width: 500px;">
+      </div>
     </td>
   </tr>
 </table>
