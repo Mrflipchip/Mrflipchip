@@ -6,6 +6,7 @@ import time
 
 import anthropic
 import requests
+from google import genai
 
 # ── Research prompts per org type ─────────────────────────────────────────────
 
@@ -213,13 +214,12 @@ def _call_gemini(prompt: str, search_queries: list[str]) -> dict | None:
     )
 
     try:
-        resp = requests.post(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-            headers={"x-goog-api-key": GEMINI_API_KEY},
-            json={"contents": [{"parts": [{"text": full_prompt}]}]},
-            timeout=30,
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=full_prompt,
         )
-        text = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+        text = response.text or ""
         start = text.find("{")
         end = text.rfind("}") + 1
         if start != -1 and end > start:
