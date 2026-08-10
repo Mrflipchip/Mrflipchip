@@ -9,6 +9,7 @@ Or with flags to skip steps:
   python enrich.py --type bank --country Philippines --orgs "PNB,Allied Bank" --candidates 2
   python enrich.py --type school --country Kenya --discover 20 --dry-run
 """
+from __future__ import annotations
 
 import argparse
 import csv

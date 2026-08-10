@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 """
 AflaThrive outreach pipeline.
 
@@ -210,7 +211,7 @@ def run(
         test_address = None
 
     # Prompt about queue if it exists and user didn't explicitly handle it
-    if has_queue and not from_queue and not dry_run:
+    if has_queue and not from_queue and not dry_run and not live:
         queue = load_queue()
         ans = input(f"\n  queue.csv has {len(queue)} contact(s) from a previous run. Process queue first? [y/N]: ").strip().lower()
         if ans == "y":

@@ -214,7 +214,8 @@ def _call_gemini(prompt: str, search_queries: list[str]) -> dict | None:
 
     try:
         resp = requests.post(
-            f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}",
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+            headers={"x-goog-api-key": GEMINI_API_KEY},
             json={"contents": [{"parts": [{"text": full_prompt}]}]},
             timeout=30,
         )
