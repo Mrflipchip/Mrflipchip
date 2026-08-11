@@ -7,4 +7,4 @@ pyairtable
 python-dotenv
 anthropic
 pymupdf
-google-genai
+openai

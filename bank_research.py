@@ -6,7 +6,7 @@ import time
 
 import anthropic
 import requests
-from google import genai
+from openai import OpenAI
 
 # ── Research prompts per org type ─────────────────────────────────────────────
 
@@ -141,6 +141,7 @@ _ORG_TYPE_LABELS = {
 
 BRAVE_API_KEY = os.environ.get("BRAVE_API_KEY", "")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+CEREBRAS_API_KEY = os.environ.get("CEREBRAS_API_KEY", "")
 
 _SEARCH_QUERIES = {
     "bank": [
@@ -193,9 +194,9 @@ def _brave_search(query: str, count: int = 5) -> str:
         return ""
 
 
-def _call_gemini(prompt: str, search_queries: list[str]) -> dict | None:
-    """Brave search + Gemini Flash. Zero Anthropic credits used."""
-    if not GEMINI_API_KEY:
+def _call_cerebras(prompt: str, search_queries: list[str]) -> dict | None:
+    """Brave search + Cerebras Llama 3.3 70B. Zero Anthropic credits used."""
+    if not CEREBRAS_API_KEY:
         return None
 
     search_context = ""
@@ -214,18 +215,18 @@ def _call_gemini(prompt: str, search_queries: list[str]) -> dict | None:
     )
 
     try:
-        client = genai.Client(api_key=GEMINI_API_KEY)
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=full_prompt,
+        client = OpenAI(api_key=CEREBRAS_API_KEY, base_url="https://api.cerebras.ai/v1")
+        response = client.chat.completions.create(
+            model="llama-3.3-70b",
+            messages=[{"role": "user", "content": full_prompt}],
         )
-        text = response.text or ""
+        text = response.choices[0].message.content or ""
         start = text.find("{")
         end = text.rfind("}") + 1
         if start != -1 and end > start:
             return json.loads(text[start:end])
     except Exception as e:
-        print(f"  Gemini error: {e}")
+        print(f"  Cerebras error: {e}")
     return None
 
 
@@ -264,17 +265,17 @@ def research_org(org_name: str, org_type: str, country: str, client: anthropic.A
     prompt_template = _PROMPTS.get(org_type, BANK_RESEARCH_PROMPT)
     prompt = prompt_template.format(org=org_name, country=country)
 
-    if BRAVE_API_KEY and GEMINI_API_KEY:
+    if BRAVE_API_KEY and CEREBRAS_API_KEY:
         raw_queries = _SEARCH_QUERIES.get(org_type, _SEARCH_QUERIES["bank"])
         queries = [q.format(org=org_name, country=country) for q in raw_queries]
-        data = _call_gemini(prompt, queries)
+        data = _call_cerebras(prompt, queries)
         if data:
             data.setdefault("bank", org_name)
             data["bank"] = org_name
             audience = data.get("audience", "mixed")
             data["retention_line"] = RETENTION_OPTIONS.get(audience, RETENTION_OPTIONS["mixed"])
             return data
-        print("  Gemini unavailable, falling back to Anthropic...")
+        print("  Cerebras unavailable, falling back to Anthropic...")
 
     data = _call_api(prompt, client)
 
@@ -302,14 +303,14 @@ def discover_orgs(org_type: str, country: str, limit: int, client: anthropic.Ant
         limit=limit,
     )
 
-    if BRAVE_API_KEY and GEMINI_API_KEY:
+    if BRAVE_API_KEY and CEREBRAS_API_KEY:
         disc_key = f"discovery_{org_type}"
         raw_queries = _SEARCH_QUERIES.get(disc_key, _SEARCH_QUERIES.get("discovery_bank"))
         queries = [q.format(org_type=org_type, country=country) for q in raw_queries]
-        data = _call_gemini(prompt, queries)
+        data = _call_cerebras(prompt, queries)
         if data and isinstance(data.get("orgs"), list):
             return [o for o in data["orgs"] if isinstance(o, str) and o.strip()][:limit]
-        print("  Gemini unavailable, falling back to Anthropic...")
+        print("  Cerebras unavailable, falling back to Anthropic...")
 
     data = _call_api(prompt, client)
     if data and isinstance(data.get("orgs"), list):
