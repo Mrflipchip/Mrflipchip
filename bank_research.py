@@ -217,7 +217,7 @@ def _call_cerebras(prompt: str, search_queries: list[str]) -> dict | None:
     try:
         client = OpenAI(api_key=CEREBRAS_API_KEY, base_url="https://api.cerebras.ai/v1")
         response = client.chat.completions.create(
-            model="llama-3.3-70b",
+            model="gpt-oss-120b",
             messages=[{"role": "user", "content": full_prompt}],
         )
         text = response.choices[0].message.content or ""
