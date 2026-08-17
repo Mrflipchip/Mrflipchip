@@ -115,18 +115,18 @@ def clear_queue() -> None:
 
 # ── Airtable logging ──────────────────────────────────────────────────────────
 
-def log_to_airtable(cfg: dict, contact: dict, status: str):
+def log_to_airtable(cfg: dict, contact: dict, status: str, subject: str = ""):
     try:
         from pyairtable import Api
         api = Api(cfg["airtable_api_key"])
         table = api.table(cfg["airtable_base_id"], cfg["airtable_table_name"])
         table.create({
-            "Name": contact["name"],
-            "Email": contact["email"],
-            "Bank": contact["bank"],
-            "Role": contact["role"],
+            "Company": contact["bank"],
+            "Founder Name": contact["name"],
+            "Founder Email": contact["email"],
+            "Date Sent": str(date.today()),
+            "Subject Line": subject,
             "Status": status,
-            "Country": contact.get("country", ""),
         })
     except Exception as e:
         print(f"  [Airtable] Could not log: {e}")
@@ -320,7 +320,7 @@ def run(
             if not test_address:
                 sent_today = increment_send_count()
             if cfg.get("airtable_api_key"):
-                log_to_airtable(cfg, contact, "Sent")
+                log_to_airtable(cfg, contact, "Sent", subject)
         except Exception as e:
             print(f"  SEND FAILED: {e}")
 
