@@ -327,7 +327,7 @@ def run(
     if queued_overflow:
         save_to_queue(queued_overflow)
 
-    if from_queue and not queued_overflow:
+    if from_queue and not queued_overflow and not dry_run:
         clear_queue()
         print("\n  Queue processed and cleared.")
 
