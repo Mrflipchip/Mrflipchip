@@ -1,0 +1,46 @@
+SUBJECT:
+AflaThrive x {{Bank}}: CRA-Qualifying Financial Education
+
+─────────────────────────────────────────────────────────────
+BODY (paste into Gmail, then send via Mailmeteor):
+─────────────────────────────────────────────────────────────
+
+Dear {{First Name}},
+
+{{Bank}}'s CRA commitments put community financial education at the centre of your reinvestment strategy. I wanted to reach out because AflaThrive has a direct fit for your next reporting cycle.
+
+I work with AflaThrive, the commercial arm of Aflatoun International — a World Bank-validated financial education organisation operating in 112 countries, with 42 million participants reached across 50 languages. We license a structured financial education curriculum that embeds directly into your community programmes. Your brand. Your delivery. Fully reportable outcomes.
+
+For {{Bank}} specifically:
+
+CRA fit: Our curriculum targets underserved communities with validated financial literacy content — savings behaviour, budgeting, and entrepreneurship — producing measurable, reportable behaviour change that qualifies under CRA service and investment test requirements.
+
+Outcomes: Programme completers are 40% more likely to open savings accounts and hold 3x more funds than non-participants, validated by a World Bank randomised controlled trial.
+
+Scale: Modular content that drops into your existing community delivery infrastructure. Pre and post assessment data flows back to you. No additional operational burden.
+
+I would welcome a short call to explore the fit with your CRA plan. Would next week work?
+
+Best regards,
+Julian Coulbert
+Commercial Strategy & Operations · AflaThrive
+julian.coulbert@aflathrive.com
++44 7882 827178
+aflathrive.com
+linkedin.com/in/julian-coulbert
+A commercial venture of Aflatoun International
+20 years · 112 countries · 42M+ young people reached
+
+─────────────────────────────────────────────────────────────
+MAILMETEOR SETUP NOTES:
+─────────────────────────────────────────────────────────────
+Merge tags used:    {{First Name}}   {{Bank}}
+CSV columns needed: First Name       Bank       Email
+
+Upload us_contacts_mailmeteor.csv to your Mailmeteor Google Sheet.
+Mailmeteor will auto-detect the column headers as merge tags.
+
+Flag before sending:
+- rtemple@yourpremierbank.com (WesBanco) — old domain, verify manually
+- michelle.lemerond@53.com — Extrapolated (not confirmed)
+- alejandra.ormeno@key.com — Extrapolated (not confirmed)
