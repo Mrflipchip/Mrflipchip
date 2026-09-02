@@ -5,7 +5,6 @@ import os
 import sys
 import anthropic
 
-from ph_contacts import CONTACTS
 from bank_research import research_bank
 from aflathrive_template import generate_email
 from titan_client import send_email
@@ -23,25 +22,38 @@ def load_config():
     return cfg
 
 
-def log_to_airtable(cfg, contact, status):
+def load_contacts(contacts_module: str) -> list:
+    import importlib
+    mod = importlib.import_module(contacts_module.replace(".py", "").replace("/", "."))
+    return mod.CONTACTS
+
+
+def log_to_airtable(cfg, contact, status, country="Philippines"):
     try:
         from pyairtable import Api
         api = Api(cfg["airtable_api_key"])
         table = api.table(cfg["airtable_base_id"], cfg["airtable_table_name"])
         table.create({"Name": contact["name"], "Email": contact["email"],
                       "Bank": contact["bank"], "Role": contact["role"],
-                      "Status": status, "Country": "Philippines"})
+                      "Status": status, "Country": country})
     except Exception as e:
         print(f"  [Airtable] Could not log: {e}")
 
 
-def run(dry_run, bank_filter, test_address):
+def run(dry_run, bank_filter, test_address, contacts_file="ph_contacts"):
     cfg = load_config()
     if not cfg["anthropic_api_key"]:
         sys.exit("Missing ANTHROPIC_API_KEY.")
 
     client = anthropic.Anthropic(api_key=cfg["anthropic_api_key"])
-    contacts = CONTACTS
+
+    try:
+        contacts = load_contacts(contacts_file)
+    except (ImportError, AttributeError) as e:
+        sys.exit(f"Could not load contacts from '{contacts_file}': {e}")
+
+    country = "United States" if "us_contacts" in contacts_file else "Philippines"
+
     if bank_filter:
         contacts = [c for c in contacts if bank_filter.lower() in c["bank"].lower()]
         if not contacts:
@@ -95,7 +107,7 @@ def run(dry_run, bank_filter, test_address):
                        attachments=[pdf_path] if pdf_path else None)
             print(f"  Sent to {to}")
             if cfg.get("airtable_api_key"):
-                log_to_airtable(cfg, contact, "Sent")
+                log_to_airtable(cfg, contact, "Sent", country=country)
         except Exception as e:
             print(f"  SEND FAILED: {e}")
 
@@ -105,8 +117,11 @@ def main():
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--bank")
     p.add_argument("--test-address")
+    p.add_argument("--contacts", default="ph_contacts",
+                   help="Contacts module to load (default: ph_contacts, use us_contacts for US banks)")
     args = p.parse_args()
-    run(dry_run=args.dry_run, bank_filter=args.bank, test_address=args.test_address)
+    run(dry_run=args.dry_run, bank_filter=args.bank, test_address=args.test_address,
+        contacts_file=args.contacts)
 
 
 if __name__ == "__main__":
