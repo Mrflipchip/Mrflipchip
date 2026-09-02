@@ -7,9 +7,9 @@ BODY (paste into Gmail, then send via Mailmeteor):
 
 Hi {{First Name}},
 
-I work with AflaThrive — we build financial education curriculum for banks that need to show real behaviour change under CRA, not just participation numbers.
+I work with AflaThrive. We build financial education curriculum for banks that need to show real behaviour change under CRA, not just participation numbers.
 
-Most of the community programmes I see have good delivery infrastructure but no rigorous pre/post assessment. That gap makes it hard to document outcomes when examiners ask. Our curriculum plugs into what you already run and generates the data.
+Most of the community programmes I see have solid delivery infrastructure but no rigorous pre/post assessment. That gap makes it hard to document outcomes when examiners ask. Our curriculum plugs into what you already run and generates the data.
 
 The numbers are from a World Bank randomised controlled trial: completers open savings accounts at 40% higher rates and hold 3x more funds than non-participants. Across 112 countries, 42 million people.
 
