@@ -1,5 +1,5 @@
 SUBJECT:
-AflaThrive x {{Bank}}: CRA-Qualifying Financial Education
+CRA reporting — AflaThrive
 
 ─────────────────────────────────────────────────────────────
 BODY (paste into Gmail, then send via Mailmeteor):
@@ -7,29 +7,15 @@ BODY (paste into Gmail, then send via Mailmeteor):
 
 Dear {{First Name}},
 
-{{Bank}}'s CRA commitments put community financial education at the centre of your reinvestment strategy. I wanted to reach out because AflaThrive has a direct fit for your next reporting cycle.
+Banks with CRA obligations face a specific documentation problem: showing measurable behaviour change in underserved communities, not just programme participation. It's hard to produce data that holds up to examiner scrutiny.
 
-I work with AflaThrive, the commercial arm of Aflatoun International — a World Bank-validated financial education organisation operating in 112 countries, with 42 million participants reached across 50 languages. We license a structured financial education curriculum that embeds directly into your community programmes. Your brand. Your delivery. Fully reportable outcomes.
+That's what AflaThrive is built for. We're the commercial arm of Aflatoun International — a World Bank-validated financial education organisation across 112 countries, 42 million participants. Our curriculum runs inside your existing community delivery and returns pre- and post-assessment data you can put directly in front of regulators. Completers are 40% more likely to open savings accounts and hold 3x more funds than non-participants — from a World Bank randomised controlled trial.
 
-For {{Bank}} specifically:
+Would a 20-minute call this week or next make sense? I can walk through the CRA documentation angle specifically.
 
-CRA fit: Our curriculum targets underserved communities with validated financial literacy content — savings behaviour, budgeting, and entrepreneurship — producing measurable, reportable behaviour change that qualifies under CRA service and investment test requirements.
-
-Outcomes: Programme completers are 40% more likely to open savings accounts and hold 3x more funds than non-participants, validated by a World Bank randomised controlled trial.
-
-Scale: Modular content that drops into your existing community delivery infrastructure. Pre and post assessment data flows back to you. No additional operational burden.
-
-I would welcome a short call to explore the fit with your CRA plan. Would next week work?
-
-Best regards,
 Julian Coulbert
-Commercial Strategy & Operations · AflaThrive
-julian.coulbert@aflathrive.com
-+44 7882 827178
-aflathrive.com
-linkedin.com/in/julian-coulbert
-A commercial venture of Aflatoun International
-20 years · 112 countries · 42M+ young people reached
+AflaThrive · julian.coulbert@aflathrive.com · +44 7882 827178
+112 countries · 42M participants · aflathrive.com
 
 ─────────────────────────────────────────────────────────────
 MAILMETEOR SETUP NOTES:
