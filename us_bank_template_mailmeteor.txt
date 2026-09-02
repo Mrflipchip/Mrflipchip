@@ -1,21 +1,22 @@
 SUBJECT:
-CRA reporting — AflaThrive
+Financial education for {{Bank}}'s CRA work
 
 ─────────────────────────────────────────────────────────────
 BODY (paste into Gmail, then send via Mailmeteor):
 ─────────────────────────────────────────────────────────────
 
-Dear {{First Name}},
+Hi {{First Name}},
 
-Banks with CRA obligations face a specific documentation problem: showing measurable behaviour change in underserved communities, not just programme participation. It's hard to produce data that holds up to examiner scrutiny.
+I work with AflaThrive — we build financial education curriculum for banks that need to show real behaviour change under CRA, not just participation numbers.
 
-That's what AflaThrive is built for. We're the commercial arm of Aflatoun International — a World Bank-validated financial education organisation across 112 countries, 42 million participants. Our curriculum runs inside your existing community delivery and returns pre- and post-assessment data you can put directly in front of regulators. Completers are 40% more likely to open savings accounts and hold 3x more funds than non-participants — from a World Bank randomised controlled trial.
+Most of the community programmes I see have good delivery infrastructure but no rigorous pre/post assessment. That gap makes it hard to document outcomes when examiners ask. Our curriculum plugs into what you already run and generates the data.
 
-Would a 20-minute call this week or next make sense? I can walk through the CRA documentation angle specifically.
+The numbers are from a World Bank randomised controlled trial: completers open savings accounts at 40% higher rates and hold 3x more funds than non-participants. Across 112 countries, 42 million people.
+
+Worth a quick call to see if it fits what {{Bank}} is working on? Happy to keep it to 20 minutes.
 
 Julian Coulbert
 AflaThrive · julian.coulbert@aflathrive.com · +44 7882 827178
-112 countries · 42M participants · aflathrive.com
 
 ─────────────────────────────────────────────────────────────
 MAILMETEOR SETUP NOTES:
