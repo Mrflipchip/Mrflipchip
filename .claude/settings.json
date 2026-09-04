@@ -1,5 +1,6 @@
 {
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(python send_pipeline.py*)",
       "Bash(python enrich.py*)",
