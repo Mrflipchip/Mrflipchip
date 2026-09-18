@@ -7,3 +7,9 @@ assets/
 .env
 queue.csv
 send_log.json
+
+# Contact data — PII, keep off public repo
+*_contacts.csv
+email_tracker.csv
+contacts.csv
+us_contacts_*.csv
